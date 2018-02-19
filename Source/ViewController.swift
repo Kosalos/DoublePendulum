@@ -18,7 +18,16 @@ class ViewController: UIViewController {
     @IBOutlet var speed1Legend: UILabel!
     @IBOutlet var speed2Legend: UILabel!
 
-    @IBAction func resetPressed(_ sender: UIButton) { pendulum.reset() }
+    @IBAction func resetPressed(_ sender: UIButton) {
+        pendulum.reset()
+        p1Mass.value = pendulum.getMass1Ratio()
+        p2Mass.value = pendulum.getMass2Ratio()
+        p1Length.value = pendulum.getLength1Ratio()
+        p2Length.value = pendulum.getLength2Ratio()
+        p1Speed.value = pendulum.getSpeed1Ratio()
+        p2Speed.value = pendulum.getSpeed2Ratio()
+    }
+    
     @IBAction func p1MassChange(_ sender: UISlider) { pendulum.setMass1(sender.value) }
     @IBAction func p1LengthChange(_ sender: UISlider) { pendulum.setLength1(sender.value) }
     @IBAction func p1SpeedChange(_ sender: UISlider) { pendulum.setSpeed1(sender.value) }
@@ -32,6 +41,8 @@ class ViewController: UIViewController {
         pendulum = Pendulum(view.bounds)
         timer = Timer.scheduledTimer(timeInterval:1.0/60.0, target: self, selector: #selector(timerHandler), userInfo: nil, repeats: true)
         screenRotated()
+        
+        resetPressed(resetButton)
     }
     
     //MARK: -

@@ -77,8 +77,16 @@ class Pendulum
     func setSpeed1(_ ratio:Float) { speed1 = mix(speedMin,speedMax,ratio) }
     func setSpeed2(_ ratio:Float) { speed2 = mix(speedMin,speedMax,ratio) }
     
+    func getMass1Ratio() -> Float { return unMix(massMin,massMax,mass1) }
+    func getMass2Ratio() -> Float { return unMix(massMin,massMax,mass2) }
+    func getLength1Ratio() -> Float { return unMix(lenMin,lenMax,len1) }
+    func getLength2Ratio() -> Float { return unMix(lenMin,lenMax,len2) }
+    func getSpeed1Ratio() -> Float { return unMix(speedMin,speedMax,speed1) }
+    func getSpeed2Ratio() -> Float { return unMix(speedMin,speedMax,speed2) }
+
     func mix(_ min:Float, _ max:Float, _ ratio:Float) -> Float { return min + (max - min) * ratio }
-    
+    func unMix(_ min:Float, _ max:Float, _ value:Float) -> Float { return (value - min) / (max - min) }
+
     func update() {
         let mu:Float = 1 + mass1 / mass2
         let time:Float = 0.05
